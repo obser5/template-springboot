@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.han.mapper.MyUserMapper">
+    <resultMap id="BaseResultMap" type="com.han.model.MyUser">
+<!--        property对应model字段，column对应表中字段-->
+        <id property="id" column="id"></id>
+        <result property="username" column="username"></result>
+        <result property="password" column="password"></result>
+        <result property="token" column="token"></result>
+    </resultMap>
+
+    <select id="listAllMyUsers" resultMap="BaseResultMap">
+        select *
+        from t_myuser
+    </select>
+</mapper>
