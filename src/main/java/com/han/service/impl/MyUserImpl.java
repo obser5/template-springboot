@@ -15,11 +15,12 @@ import java.util.List;
  * @since 2021/9/10
  */
 @Service
-@Transactional(rollbackFor = Exception.class)
+@Transactional(rollbackFor = Exception.class) // 非运行时异常时也可回滚
 public class MyUserImpl implements IMyUserService {
-
+    /**
+     * 构造器注入
+     */
     private final MyUserMapper myUserMapper;
-
     @Autowired
     public MyUserImpl(MyUserMapper myUserMapper) {
         Assert.notNull(myUserMapper, "myUserMapper must not by null!");
@@ -29,5 +30,10 @@ public class MyUserImpl implements IMyUserService {
     @Override
     public List<MyUser> listAllMyUsers() {
         return myUserMapper.listAllMyUsers();
+    }
+
+    @Override
+    public MyUser getMyUserById(int id) {
+        return myUserMapper.getMyUserById(id);
     }
 }

@@ -11,9 +11,17 @@ import java.util.List;
  */
 public interface IMyUserService {
     /**
-     * 查询所有MyUser
+     * 查找所有MyUser
      *
      * @return
      */
      List<MyUser> listAllMyUsers();
+
+    /**
+     * 通过id查找MyUser
+     *
+     * @param id t_myuser主键
+     * @return
+     */
+     MyUser getMyUserById(int id);
 }

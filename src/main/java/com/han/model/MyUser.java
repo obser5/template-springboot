@@ -4,7 +4,7 @@ import lombok.Data;
 import lombok.ToString;
 
 /**
- * 测试类
+ * 测试pojo类
  *
  * @author hmj
  * @since 2021/9/9

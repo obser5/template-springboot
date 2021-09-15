@@ -6,9 +6,9 @@ import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.annotation.Bean;
 
 /**
- * Spring容器工具类，解决线程注入时NullPointException的问题
+ * Spring容器工具类，可确保获取实例，解决线程注入时NullPointException的问题
  *
- * @author HanMingjie
+ * @author hmj
  * @since 2021/9/10
  */
 public class SpringContextUtil implements ApplicationContextAware {

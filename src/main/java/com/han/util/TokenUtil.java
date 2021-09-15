@@ -10,7 +10,7 @@ import java.util.Date;
 import java.util.HashMap;
 
 /**
- * token工具类
+ * token工具类，用来生成和解析token
  *
  * @author hmj
  * @since 2021.9.9
