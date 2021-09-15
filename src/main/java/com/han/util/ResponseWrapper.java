@@ -1,7 +1,5 @@
 package com.han.util;
 
-import lombok.Data;
-import lombok.ToString;
 
 /**
  * 返回值包装类
@@ -9,8 +7,6 @@ import lombok.ToString;
  * @author hmj
  * @since 2021/9/9
  */
-@Data
-@ToString
 public class ResponseWrapper {
     /**
      * 状态码
@@ -24,6 +20,39 @@ public class ResponseWrapper {
      * 数据
      */
     private Object data;
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
+
+    public String getMsg() {
+        return msg;
+    }
+
+    public void setMsg(String msg) {
+        this.msg = msg;
+    }
+
+    public Object getData() {
+        return data;
+    }
+
+    public void setData(Object data) {
+        this.data = data;
+    }
+
+    @Override
+    public String toString() {
+        return "ResponseWrapper{" +
+                "code='" + code + '\'' +
+                ", msg='" + msg + '\'' +
+                ", data=" + data +
+                '}';
+    }
 
     /**
      * 成功 状态码：200，状态信息：success

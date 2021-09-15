@@ -25,7 +25,7 @@ public class WebLogAspect {
     private final static Logger logger = LoggerFactory.getLogger(WebLogAspect.class);
 
     // 切入点，扫描controller包下的类的所有方法
-    @Pointcut("execution(public * com.han.controller..*.*(..))")
+    @Pointcut("execution(* com.han.controller..*.*(..))")
 
     public void webLog() {}
 
