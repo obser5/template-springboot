@@ -12,7 +12,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 class TemplateSpringbootApplicationTests {
 
     private static final Logger logger = LoggerFactory.getLogger(TemplateSpringbootApplicationTests.class);
-
+    /**
+     * 字段注入
+     */
     @Autowired
     private MyUserMapper myUserMapper;
 

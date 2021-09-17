@@ -13,15 +13,14 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 import javax.servlet.http.HttpServletRequest;
 
 /**
- * controller层切面类，用来打印请求和响应参数
+ * controller层切面类，用来打印请求和响应日志
  *
  * @author hmj
  * @since 2021/9/14
  */
 @Aspect
-@Component
+@Component // 不想用的话把@Component注释掉就可以
 public class WebLogAspect {
-
     private final static Logger logger = LoggerFactory.getLogger(WebLogAspect.class);
 
     // 切入点，扫描controller包下的类的所有方法
@@ -40,14 +39,14 @@ public class WebLogAspect {
         ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
         HttpServletRequest request = attributes.getRequest();
         // 打印请求相关参数
-        logger.info("========================================== Request ===========================================");
-        // 打印请求 url
+        logger.info("========================================== Request ============================================");
+        // 打印请求url
         logger.info("URL            : {}", request.getRequestURL().toString());
-        // 打印 Http method
+        // 打印Http method
         logger.info("HTTP Method    : {}", request.getMethod());
-        // 打印调用 controller 的全路径以及执行方法
+        // 打印调用controller的全路径以及执行方法
         logger.info("Class Method   : {}.{}", joinPoint.getSignature().getDeclaringTypeName(), joinPoint.getSignature().getName());
-        // 打印请求的 IP
+        // 打印请求的IP
         logger.info("IP             : {}", request.getRemoteAddr());
         // 打印请求入参
         logger.info("Request Args   : {}", JSONObject.toJSON(request.getParameterMap()));
@@ -58,7 +57,7 @@ public class WebLogAspect {
      */
     @After("webLog()")
     public void doAfter() {
-        logger.info("=========================================== Response =========================================");
+        logger.info("");
     }
 
     /**
@@ -71,11 +70,11 @@ public class WebLogAspect {
     public Object doAround(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
         long startTime = System.currentTimeMillis();
         Object result = proceedingJoinPoint.proceed();
+        logger.info("========================================== Response ===========================================");
         // 打印出参
         logger.info("Response Args  : {}", JSONObject.toJSON(result));
         // 执行耗时
         logger.info("Time-Consuming : {} ms", System.currentTimeMillis() - startTime);
-        logger.info("=========================================== End ==============================================");
         logger.info("");
         return result;
     }

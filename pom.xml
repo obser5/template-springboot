@@ -10,9 +10,9 @@
     </parent>
     <groupId>com.han</groupId>
     <artifactId>template-springboot</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>0.0.2</version>
     <name>template-springboot</name>
-    <description>Template for Spring Boot By Han</description>
+    <description>Template for Spring Boot By Hmj</description>
     <properties>
         <java.version>1.8</java.version>
     </properties>
@@ -21,12 +21,12 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
-        <!--mybatis 与 jdbc 的 starter 存在其中任意一个都需要配置数据源，不然会报错-->
+        <!--mybatis与jdbc的starter存在其中任意一个都需要配置数据源，不然会报错-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-jdbc</artifactId>
         </dependency>
-        <!--mybatis 与 jdbc 的 starter 存在其中任意一个都需要配置数据源，不然会报错-->
+        <!--mybatis与jdbc的starter存在其中任意一个都需要配置数据源，不然会报错-->
         <dependency>
             <groupId>org.mybatis.spring.boot</groupId>
             <artifactId>mybatis-spring-boot-starter</artifactId>
@@ -85,24 +85,56 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <version>2.5.4</version>
             </plugin>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+
+            <!--自定义打包插件，package可打包 .zip .tar.gz-->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <version>3.3.0</version>
+                <configuration>
+                    <!--生成压缩包最终名称，若不设置则与jar包同名-->
+<!--                    <finalName>Source code</finalName>-->
+                    <!--若appendAssemblyId设置为true，最终生成压缩包的名字为finalName + assembly.xml中的<id></id>-->
+                    <appendAssemblyId>false</appendAssemblyId>
+                    <descriptors>
+                        <!--assembly配置文件路径-->
+                        <descriptor>src/main/resources/assembly/assembly.xml</descriptor>
+                    </descriptors>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>make-assembly</id>
+                        <!--对应maven生命周期-->
+                        <phase>package</phase>
+                        <goals>
+                            <!--只运行一次-->
+                            <goal>single</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
 
-        <!-- 资源目录 -->
+        <!--资源目录-->
         <resources>
             <resource>
-                <!-- 设定主资源目录  -->
+                <!--设定主资源目录-->
                 <directory>src/main/java</directory>
-                <!-- maven default生命周期，process-resources阶段执行maven-resources-plugin插件的resources目标处理主资源目下的资源文件时，只处理如下配置中包含的资源类型 -->
+                <!--maven default生命周期，process-resources阶段执行maven-resources-plugin插件的resources目标处理主资源目下的资源文件时，只处理如下配置中包含的资源类型-->
                 <includes>
                     <include>com/han/mapper/*.xml</include>
                 </includes>
-                <!-- maven default生命周期，process-resources阶段执行maven-resources-plugin插件的resources目标处理主资源目下的资源文件时，不处理如下配置中包含的资源类型（剔除下如下配置中包含的资源类型）-->
+                <!--不处理如下配置中包含的资源类型（剔除下如下配置中包含的资源类型）-->
                 <excludes>
                     <exclude>**/*.yaml</exclude>
                 </excludes>
-                <!-- 指定处理后的资源文件输出目录，默认是${build.outputDirectory}指定的目录-->
-                <!--<targetPath>${build.outputDirectory}</targetPath> -->
-                <!-- 是否对主资源目录开启资源过滤 -->
+                <!--指定处理后的资源文件输出目录，默认是${build.outputDirectory}指定的目录-->
+<!--                <targetPath>${build.outputDirectory}</targetPath>-->
+                <!--是否对主资源目录开启资源过滤-->
                 <filtering>false</filtering>
             </resource>
             <resource>
@@ -110,5 +142,4 @@
             </resource>
         </resources>
     </build>
-
 </project>
