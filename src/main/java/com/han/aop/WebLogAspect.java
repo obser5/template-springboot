@@ -13,17 +13,17 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 import javax.servlet.http.HttpServletRequest;
 
 /**
- * controller层切面类，用来打印请求和响应日志
+ * controller层切面类，用来打印请求和响应日志，不想用的话把@Component注释掉就可以
  *
  * @author hmj
  * @since 2021/9/14
  */
 @Aspect
-@Component // 不想用的话把@Component注释掉就可以
+@Component
 public class WebLogAspect {
     private final static Logger logger = LoggerFactory.getLogger(WebLogAspect.class);
 
-    // 切入点，扫描controller包下的类的所有方法
+    // 切入点，扫描com.han.controller包下的类的所有方法
     @Pointcut("execution(* com.han.controller..*.*(..))")
 
     public void webLog() {}

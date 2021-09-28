@@ -4,8 +4,23 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="">
     <resultMap id="BaseResultMap" type="">
-        <id property="" column=""></id>
-        <result property="" column=""></result>
+        <id property="" column=""/>
+        <result property="" column=""/>
     </resultMap>
 
+    <select id="" resultMap="BaseResultMap">
+
+    </select>
+
+    <insert id="">
+
+    </insert>
+
+    <update id="">
+
+    </update>
+
+    <delete id="">
+
+    </delete>
 </mapper>

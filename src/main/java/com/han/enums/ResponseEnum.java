@@ -10,11 +10,11 @@ public enum ResponseEnum {
     /**
      * 成功
      */
-    SUCCESS(2000, "success"),
+    SUCCESS(1, "success"),
     /**
      * 失败
      */
-    FAILED(4000, "failed");
+    FAILED(0, "failed");
 
     /**
      * 状态码

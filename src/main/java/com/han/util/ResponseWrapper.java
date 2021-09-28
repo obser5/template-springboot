@@ -1,11 +1,10 @@
 package com.han.util;
 
 
-import com.han.enums.BusinessExceptionEnum;
 import com.han.enums.ResponseEnum;
 
 /**
- * 返回值包装类 {"code":int, "msg":String, "data":Object}
+ * 返回值包装类
  *
  * @author hmj
  * @since 2021/9/9
@@ -66,6 +65,15 @@ public class ResponseWrapper {
     /**
      * 成功
      *
+     * @return
+     */
+    public static ResponseWrapper markSuccess() {
+        return new ResponseWrapper(ResponseEnum.SUCCESS.getCode(), ResponseEnum.SUCCESS.getMsg(), "");
+    }
+
+    /**
+     * 成功
+     *
      * @param data 数据
      * @return
      */
@@ -74,30 +82,21 @@ public class ResponseWrapper {
     }
 
     /**
-     * 服务异常
+     * 失败
      *
      * @return
      */
-    public static ResponseWrapper markServerException() {
+    public static ResponseWrapper markFailed() {
         return new ResponseWrapper(ResponseEnum.FAILED.getCode(), ResponseEnum.FAILED.getMsg(), "");
     }
 
     /**
-     * 服务异常，可打印异常信息
+     * 失败
      *
-     * @param exceptionMsg
      * @return
      */
-    public static ResponseWrapper markServerException(String exceptionMsg) {
-        return new ResponseWrapper(ResponseEnum.FAILED.getCode(), exceptionMsg, "");
+    public static ResponseWrapper markFailed(Object data) {
+        return new ResponseWrapper(ResponseEnum.FAILED.getCode(), ResponseEnum.FAILED.getMsg(), data);
     }
-    /**
-     * 业务异常
-     *
-     * @param businessExceptionEnum 业务异常枚举类
-     * @return
-     */
-    public static ResponseWrapper markBusinessException(BusinessExceptionEnum businessExceptionEnum) {
-        return new ResponseWrapper(businessExceptionEnum.getCode(), businessExceptionEnum.getMsg(), "");
-    }
+
 }

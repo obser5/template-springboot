@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.han.mapper.TestMapper">
+    <resultMap id="BaseResultMap" type="com.han.model.TestPojo">
+        <id property="id" column="id"/>
+        <result property="guid" column="guid"/>
+        <result property="username" column="username"/>
+        <result property="password" column="password"/>
+        <result property="msg" column="msg"/>
+    </resultMap>
+
+    <select id="listTest" resultMap="BaseResultMap">
+        select * from t_test
+    </select>
+
+    <select id="getTestByUsername" resultMap="BaseResultMap">
+        select * from t_test where username = #{username}
+    </select>
+
+    <select id="getTestByGuid" resultMap="BaseResultMap">
+        select * from t_test where guid = #{guid}
+    </select>
+
+    <select id="listTestLike" resultMap="BaseResultMap">
+        select * from t_test where 1=1
+        /*test内部要用""，避免解析String失败*/
+        <if test='username != null and username != ""'>
+            and username like concat('%', #{username}, '%')
+        </if>
+        <if test='msg != null and msg != ""'>
+            and msg like concat('%', #{msg}, '%')
+        </if>
+    </select>
+
+    <insert id="addTest">
+        insert into t_test(guid, username, password, msg)
+        values (#{guid}, #{username}, #{password}, #{msg})
+    </insert>
+
+    <!--批量添加，返回自增主键-->
+    <insert id="addTestList" keyProperty="id" useGeneratedKeys="true">
+        insert into t_test(guid, username, password, msg) values
+        <foreach collection="testPojoList" item="item" index="index" separator=",">
+            (#{item.guid}, #{item.username}, #{item.password}, #{item.msg})
+        </foreach>
+    </insert>
+
+    <update id="alterPasswordTest">
+        update t_test set password = #{password} where username = #{username}
+    </update>
+
+    <delete id="deleteTest">
+        delete from t_test where guid = #{guid}
+    </delete>
+</mapper>

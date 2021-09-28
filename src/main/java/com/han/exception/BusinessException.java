@@ -10,18 +10,18 @@ import com.han.enums.BusinessExceptionEnum;
  */
 public class BusinessException extends RuntimeException{
 
-    private BusinessExceptionEnum businessExceptionEnum;
+    private BusinessExceptionEnum m_businessExceptionEnum;
 
-    public BusinessExceptionEnum getBusinessExceptionEnum() {
-        return businessExceptionEnum;
+    public BusinessExceptionEnum getM_businessExceptionEnum() {
+        return m_businessExceptionEnum;
     }
 
-    public void setBusinessExceptionEnum(BusinessExceptionEnum businessExceptionEnum) {
-        this.businessExceptionEnum = businessExceptionEnum;
+    public void setM_businessExceptionEnum(BusinessExceptionEnum m_businessExceptionEnum) {
+        this.m_businessExceptionEnum = m_businessExceptionEnum;
     }
 
     public BusinessException(BusinessExceptionEnum businessExceptionEnum) {
         super(businessExceptionEnum.getMsg());
-        this.businessExceptionEnum = businessExceptionEnum;
+        this.m_businessExceptionEnum = businessExceptionEnum;
     }
 }

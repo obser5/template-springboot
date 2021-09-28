@@ -4,7 +4,6 @@ import com.auth0.jwt.JWT;
 import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.interfaces.DecodedJWT;
-import com.han.model.MyUser;
 
 import java.util.Date;
 import java.util.HashMap;
@@ -13,7 +12,7 @@ import java.util.HashMap;
  * token工具类，用来生成和解析token
  *
  * @author hmj
- * @since 2021.9.9
+ * @since 2021/9/9
  */
 public class TokenUtil {
     /**
@@ -26,12 +25,13 @@ public class TokenUtil {
     private static final String TOKEN_SECRET = "xxx";
 
     /**
-     * 创建token
+     * 根据username password生成token
      *
-     * @param myUser 测试用pojo类
+     * @param username 用户名
+     * @param password 密码
      * @return
      */
-    public static String createToken(MyUser myUser) {
+    public static String createToken(String username, String password) {
         Date nowDate = new Date();
         Date lastDate = new Date(nowDate.getTime() + TOKEN_LIFE);
         // 头部信息，hashmap声明时最好添加初始容量，避免resize影响性能
@@ -44,8 +44,8 @@ public class TokenUtil {
                 // 头部信息
                 .withHeader(header)
                 // 载荷
-                .withClaim("username", myUser.getUsername())
-                .withClaim("password", myUser.getPassword())
+                .withClaim("username", username)
+                .withClaim("password", password)
 
                 .withSubject("end")
                 .withAudience("front")
@@ -71,15 +71,5 @@ public class TokenUtil {
             e.printStackTrace();
             return false;
         }
-    }
-
-    public static void main(String[] args) {
-        MyUser myUser = new MyUser();
-        myUser.setUsername("hmj");
-        myUser.setPassword("123");
-        String token = TokenUtil.createToken(myUser);
-        System.out.println("token = " + token);
-        boolean result = TokenUtil.verifyToken(token);
-        System.out.println("result = " + result);
     }
 }

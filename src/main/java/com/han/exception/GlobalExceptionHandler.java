@@ -20,24 +20,35 @@ import javax.servlet.http.HttpServletRequest;
 public class GlobalExceptionHandler {
     private static final Logger logger = LoggerFactory.getLogger(GlobalExceptionHandler.class);
 
-    @ExceptionHandler(Exception.class)
-    public Object serverExceptionHandler(HttpServletRequest request, Exception e) {
-        logger.info("========================================== Exception ==========================================");
-        logger.error("服务异常 接口：" + request.getRequestURL().toString() + " 错误信息：" + e.getMessage());
+    @ExceptionHandler(ServerException.class)
+    public Object serverExceptionHandler(HttpServletRequest request, ServerException e) {
+        logger.info("========================================== Server Exception ====================================");
+        logger.error("服务异常 接口：" + request.getRequestURL().toString() + " 错误码：" + e.getM_serverExceptionEnum().getCode() + " 错误信息：" + e.getM_serverExceptionEnum().getMsg());
         logger.error("堆栈简要信息：" + e.getStackTrace()[0].toString() + "...");
-        // 不返回 null
-        String exceptionMsg = e.getMessage();
-        if (exceptionMsg == null) {
-            exceptionMsg = "";
-        }
-        return ResponseWrapper.markServerException(exceptionMsg);
+        return ResponseWrapper.markFailed();
     }
 
     @ExceptionHandler(BusinessException.class)
-    public Object businessExceptionHandler(HttpServletRequest request, BusinessException businessException) {
-        logger.info("========================================== Business Exception =================================");
-        logger.error("业务异常 接口：" + request.getRequestURL().toString() + " 错误码：" + businessException.getBusinessExceptionEnum().getCode() + " 错误信息：" + businessException.getBusinessExceptionEnum().getMsg());
-        logger.error("堆栈简要信息：" + businessException.getStackTrace()[0].toString() + "...");
-        return ResponseWrapper.markBusinessException(businessException.getBusinessExceptionEnum());
+    public Object businessExceptionHandler(HttpServletRequest request, BusinessException e) {
+        logger.info("========================================== Business Exception ==================================");
+        logger.error("业务异常 接口：" + request.getRequestURL().toString() + " 错误码：" + e.getM_businessExceptionEnum().getCode() + " 错误信息：" + e.getM_businessExceptionEnum().getMsg());
+        logger.error("堆栈简要信息：" + e.getStackTrace()[0].toString() + "...");
+        return ResponseWrapper.markFailed(e.getMessage());
+    }
+
+    @ExceptionHandler(RuntimeException.class)
+    public Object runtimeExceptionHandler(HttpServletRequest request, RuntimeException e) {
+        logger.info("========================================== Runtime Exception ===================================");
+        logger.error("运行异常 接口：" + request.getRequestURL().toString() + " 错误信息：" + e.getMessage());
+        logger.error("堆栈简要信息：" + e.getStackTrace()[0].toString() + "...");
+        return ResponseWrapper.markFailed();
+    }
+
+    @ExceptionHandler(Exception.class)
+    public Object exceptionHandler(HttpServletRequest request, Exception e) {
+        logger.info("========================================== Other Exception =====================================");
+        logger.error("其它异常 接口：" + request.getRequestURL().toString() + " 错误信息：" + e.getMessage());
+        logger.error("堆栈简要信息：" + e.getStackTrace()[0].toString() + "...");
+        return ResponseWrapper.markFailed();
     }
 }

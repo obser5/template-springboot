@@ -12,16 +12,23 @@ Springboot模板，记录日常学习到的知识点。
 ## controller
 
 ### FileController
-* /upload 单文件上传
+* /upload - 单文件上传
+
+### JsonController
+* /testJson - fastjson用法
+
+### TestController
+* 常用增删改查接口
 
 ## enums
 * BusinessExceptionEnum - 业务异常枚举类
 * ResponseEnum - response枚举类
+* ServerException - 服务异常枚举类
 
 ## exception
 * BusinessException - 业务异常类
 * GlobalExceptionHandler - controller层异常处理器，可捕获controller层抛出的运行时和非运行异常，也可在controller层自行try catch处理
-
+* ServerException - 服务异常类
 
 ## util
 * ResponseWrapper - 返回值包装类

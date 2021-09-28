@@ -1,16 +1,30 @@
 package com.han.model;
 
 /**
- * 测试pojo类
- *
  * @author hmj
- * @since 2021/9/9
+ * @since 2021/9/27
  */
-public class MyUser {
+public class TestPojo {
+    /**
+     * 主键
+     */
     private int id;
+    /**
+     * 唯一标识
+     */
+    private String guid;
+    /**
+     * 用户名
+     */
     private String username;
+    /**
+     * 密码
+     */
     private String password;
-    private String token;
+    /**
+     * 其它
+     */
+    private String msg;
 
     public int getId() {
         return id;
@@ -18,6 +32,14 @@ public class MyUser {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public String getGuid() {
+        return guid;
+    }
+
+    public void setGuid(String guid) {
+        this.guid = guid;
     }
 
     public String getUsername() {
@@ -36,21 +58,22 @@ public class MyUser {
         this.password = password;
     }
 
-    public String getToken() {
-        return token;
+    public String getMsg() {
+        return msg;
     }
 
-    public void setToken(String token) {
-        this.token = token;
+    public void setMsg(String msg) {
+        this.msg = msg;
     }
 
     @Override
     public String toString() {
-        return "MyUser{" +
+        return "TestPojo{" +
                 "id=" + id +
+                ", guid='" + guid + '\'' +
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
-                ", token='" + token + '\'' +
+                ", msg='" + msg + '\'' +
                 '}';
     }
 }
