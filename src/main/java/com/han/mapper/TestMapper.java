@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 /**
- * Test Mapper
+ * Test Mapper 多参数需要@Param对应，单参数不需要
  *
  * @author hmj
  * @since 2021/9/27
@@ -29,7 +29,7 @@ public interface TestMapper {
      * @param msg      其它
      * @return
      */
-    List<TestPojo> listTestLike(String username, String msg);
+    List<TestPojo> listTestLike(@Param("username") String username, @Param("msg") String msg);
 
     /**
      * 通过用户名获取Test
@@ -70,7 +70,7 @@ public interface TestMapper {
      * @param password 密码
      * @return
      */
-    int alterPasswordTest(String username, String password);
+    int alterPasswordTest(@Param("username") String username, @Param("password") String password);
 
     /**
      * 删除Test
