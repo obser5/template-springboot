@@ -47,9 +47,9 @@ public class ResponseWrapper {
         this.data = data;
     }
 
-    private ResponseWrapper(int code, String msg, Object data) {
-        this.code = code;
-        this.msg = msg;
+    private ResponseWrapper(ResponseEnum responseEnum, Object data) {
+        this.code = responseEnum.getCode();
+        this.msg = responseEnum.getMsg();
         this.data = data;
     }
 
@@ -68,7 +68,7 @@ public class ResponseWrapper {
      * @return
      */
     public static ResponseWrapper markSuccess() {
-        return new ResponseWrapper(ResponseEnum.SUCCESS.getCode(), ResponseEnum.SUCCESS.getMsg(), "");
+        return new ResponseWrapper(ResponseEnum.SUCCESS, "");
     }
 
     /**
@@ -78,7 +78,7 @@ public class ResponseWrapper {
      * @return
      */
     public static ResponseWrapper markSuccess(Object data) {
-        return new ResponseWrapper(ResponseEnum.SUCCESS.getCode(), ResponseEnum.SUCCESS.getMsg(), data);
+        return new ResponseWrapper(ResponseEnum.SUCCESS, data);
     }
 
     /**
@@ -87,7 +87,7 @@ public class ResponseWrapper {
      * @return
      */
     public static ResponseWrapper markFailed() {
-        return new ResponseWrapper(ResponseEnum.FAILED.getCode(), ResponseEnum.FAILED.getMsg(), "");
+        return new ResponseWrapper(ResponseEnum.FAILED, "");
     }
 
     /**
@@ -96,7 +96,7 @@ public class ResponseWrapper {
      * @return
      */
     public static ResponseWrapper markFailed(Object data) {
-        return new ResponseWrapper(ResponseEnum.FAILED.getCode(), ResponseEnum.FAILED.getMsg(), data);
+        return new ResponseWrapper(ResponseEnum.FAILED, data);
     }
 
 }
