@@ -13,6 +13,7 @@ public interface FileService {
      * 单文件上传
      *
      * @param file
+     * @throws IOException
      */
     void upload(MultipartFile file) throws IOException;
 }

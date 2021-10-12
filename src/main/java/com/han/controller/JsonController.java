@@ -22,10 +22,10 @@ public class JsonController {
     @PostMapping("/testJson")
     public void testJson(@RequestParam(value = "jsonArrayStr", required = false) String jsonArrayStr,
                          @RequestParam(value = "jsonObjectStr", required = false) String jsonObjectStr) {
-        // String转JSONArray
-        JSON.parseArray(jsonArrayStr);
         // String转JSONObject
         JSON.parseObject(jsonObjectStr);
+        // String转JSONArray
+        JSON.parseArray(jsonArrayStr);
         // String转java对象
         JSON.parseObject(jsonObjectStr, TestPojo.class);
         // String转java List

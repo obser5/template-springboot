@@ -34,3 +34,9 @@ Springboot模板，记录日常学习到的知识点。
 * ResponseWrapper - 返回值包装类
 * SpringContextUtil - Spring容器工具类，可确保获取实例，解决线程注入时NullPointException的问题
 * TokenUtil - token工具类，用来生成和解析token
+
+## thrift
+* ClientDemo - Thrift客户端Demo
+* ServerDemo - Thrift服务端demo
+* ThriftService - 由.thrift和.exe生成的.java代码，实现其中的接口即可
+* ThriftServiceImpl - ThriftService实现类
