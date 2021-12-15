@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration debug="false">
+    <property resource="config.properties"/>
+    <!-- 输出格式 -->
+    <property name="out.pattern" value="%d{yyyy-MM-dd HH:mm:ss.SSS} [%-5p] [%t] [%c][%L] - %m%n" />
+    <!-- 活动文件的大小 -->
+    <property name="max.file.size" value="50MB"/>
+    <!-- 保留的归档文件的最大数量 -->
+    <property name="max.history" value="31"/>
+    <!-- 控制所有归档日志文件的总大小 -->
+    <property name="total.size.cap" value="30GB"/>
+
+    <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+        <withJansi>false</withJansi>
+        <encoder>
+            <pattern>%magenta(%date{yyyy-MM-dd HH:mm:ss.SSS}) %highlight(%-5level) %green([%thread]) %cyan(%-50logger) : %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="info" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${log.path}/info/info.log</file>
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>INFO</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>${log.path}/info/info.%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+            <maxFileSize>${max.file.size}</maxFileSize>
+            <maxHistory>${max.history}</maxHistory>
+            <cleanHistoryOnStart>true</cleanHistoryOnStart>
+            <totalSizeCap>${total.size.cap}</totalSizeCap>
+        </rollingPolicy>
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <pattern>${out.pattern}</pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+    </appender>
+
+    <appender name="error" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${log.path}/error/error.log</file>
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>ERROR</level>
+        </filter>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>${log.path}/error/error.%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+            <maxFileSize>${max.file.size}</maxFileSize>
+            <maxHistory>${max.history}</maxHistory>
+            <cleanHistoryOnStart>true</cleanHistoryOnStart>
+            <totalSizeCap>${total.size.cap}</totalSizeCap>
+        </rollingPolicy>
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <pattern>${out.pattern}</pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+    </appender>
+
+    <root level="info">
+        <appender-ref ref="info"/>
+        <appender-ref ref="console"/>
+        <appender-ref ref="error"/>
+    </root>
+</configuration>
