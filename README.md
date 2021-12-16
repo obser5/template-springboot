@@ -9,6 +9,10 @@ Springboot模板，记录日常学习到的知识点。
 ## aop
 * WebLogAspect - controller层切面类，用来打印请求和响应日志
 
+## config
+* ResponseWrapperConfigurator - websocket自定义配置类
+* WebSocketConfig - 使默认ServerEndpoint配置生效
+
 ## enums
 * BusinessExceptionEnum - 业务异常枚举类
 * ResponseEnum - response枚举类
@@ -29,5 +33,8 @@ Springboot模板，记录日常学习到的知识点。
 * ResponseWrapper - 返回值包装类
 * SpringContextUtil - Spring容器工具类，可确保获取实例，解决线程注入时NullPointException的问题
 * TokenUtil - token工具类，用来生成和解析token
+
+## websocket
+* WebSocketTest - websocket接口，添加了自定义配置类，用来对请求和响应进行包装
 
 
